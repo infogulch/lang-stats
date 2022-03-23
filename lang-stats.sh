@@ -27,7 +27,7 @@ do
     [ "$(xsv search -s date "$DATE" "$STATS_FILE" | xsv count)" -gt 0 ] && continue # is xsv really required?
 
     # skip if commit is the same as the previous commit (i.e. no changes since previous week)
-    COMMIT="$(git rev-list --until="$DATE" -1 "$BRANCH")"
+    COMMIT="$(git rev-list --until="$DATE" --first-parent -1 "$BRANCH")"
     [ "$COMMIT" = "$PREV_COMMIT" ] && continue
     PREV_COMMIT="$COMMIT"
 
